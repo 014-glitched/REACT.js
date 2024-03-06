@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM  from "react-dom/client";
+
 // const heading = React.createElement("h1", {}, "Frontend Developer");
 // //{id: "Heading"} - this object is used to give attributes to the tag {id: "Heading"} here the attribute is id
 // //React.createElement it creates an object a javascript object 
