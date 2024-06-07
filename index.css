@@ -6,7 +6,7 @@
 
 .logo{
     width: 150px;
-    
+    margin: 2px 0 2px 0;
 }
 
 .nav-items > ul{
@@ -35,6 +35,7 @@
 .res-card{
     padding: 10px;
     width: 180px;
+    height: 450px;
 }
 
 .res-card:hover{
@@ -50,4 +51,33 @@
 .filter-btn{
     margin: 10px;
     cursor: pointer;
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.shimmer-card{
+    margin: 20px;
+    width: 180px;
+    height: 450px;
+    background-color: #bdb5b5;
+    margin: 20px;
+  border-radius: 11px;
+}
+
+.login{
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.filter{
+    display: flex;
+}
+
+.user-card{
+    padding: 10px;
+    border: 1px solid brown;
 }
