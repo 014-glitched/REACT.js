@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const Body = () => {
@@ -11,7 +12,8 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState("");
 
-    console.log('Body rendered');
+//     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
     
      useEffect(() => {
           fetchData();
@@ -38,19 +40,22 @@ const Body = () => {
           return 
                <h1>Look's like you're offline!! Please check your Internet connection.</h1>
 
+     const{loggedInUser, setUserName} = useContext(UserContext);
+
      return (listOfRestaurants.length === 0) ? <Shimmer/> :          //writing the condition using ternary operator
      ( 
          <div className="body">
-              <div className="filter">
-               <div className="search">
+              <div className="filter flex">
+               <div className="search m-4 p-4">
                     <input type="text" 
-                    className="search-box" 
+                    className="border border-solid border-black" 
                     value={searchText}  //here we are binding the searchText to the input box that means whatever will be in the searchText variable will be there inside the value box so when we are changing the value of input box the value of input box is still tight to the searchText because the value is bind to the searchText and searchText initially is empty so the input box will not change untill we change the searchTextto fix this we will use onChange handler. onChange function will update the searchText. Each time we are writing anything inside our input box the whole body component is getting rendered if we write "Cafe" so it will render 4 times like on a single word we write inside the box it renders the whole component and compare the old DOM with the new DOM.
                     onChange={(e) => {
                          setSearchText(e.target.value);
                     }} />
                     
-                    <button onClick={() => {
+                    <button className="px-4 py-1 bg-teal-200 m-4 rounded-lg"
+                         onClick={() => {
                          //Filter the restaurant cards and update the UI
                          const filteredRestaurant = listOfRestaurants.filter((res) => 
                          res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -60,22 +65,33 @@ const Body = () => {
                     }}>
                          Search</button>
                </div>
+                    <div className="m-4 p-4 flex items-center">
                     <button
-                              className="filter-btn"
+                              className="px-4 py-2 bg-gray-300 rounded-lg"
+
                               onClick={() => {
                               // * Filter logic
                               const filteredList = listOfRestaurants.filter(
                               (res) => res.info.avgRating > 4.3
                               );
 
-                    setListOfRestaurants(filteredList);
-                    //console.log(filteredList);
-                    }}
-               >
-                         Top Rated Restaurants</button>  
-
+                         setListOfRestaurants(filteredList);
+                         //console.log(filteredList);
+                         }}
+                    >
+                         Top Rated Restaurants
+                     </button>  
+                    </div>
+                         <div className="m-4 p-4 flex items-center">
+                              <label className="m-1">UserName: </label>
+                              <input className="border border-black px-2 rounded-lg" 
+                              value={loggedInUser}
+                              onChange={(e) => setUserName(e.target.value)}
+                              />
+                         </div>
+                   
              </div>
-              <div className="res-container">
+              <div className="flex flex-wrap ">
                    {/* <RestaurantCard resName = "Manish Eating Point" cuisine="Biryani, Chinese"/>
                    <RestaurantCard resName = "KFC" cuisine="Burgers, Fries" />
                    <RestaurantCard/> */}
@@ -84,7 +100,13 @@ const Body = () => {
                          key={restaurant.info.id}
                          to={"/restaurants/" + restaurant.info.id}
                     >
-                         <RestaurantCard resData={restaurant} /> 
+                    {/* *if the restaurant is promoted then add a promoted label to it
+                         {restaurant.data.promoted ? 
+                         (<RestaurantCardPromoted resData={restaurant}/>) : 
+                         (<RestaurantCard resData={restaurant} /> )
+                         } */}
+                         {<RestaurantCard resData={restaurant} />}
+                         
                     </Link>
                    ))}
               </div>

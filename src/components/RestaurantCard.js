@@ -14,12 +14,11 @@ const RestaurantCard = (props) => { //or we can write ({resName, cuisine}) => {}
     
        return (
               <div
-                className="res-card"
-                style={{ backgroundColor: '#f0f0f0',}}>
+                className="m-4 p-4 w-[200px] rounded-lg h-auto bg-gray-100 hover:bg-slate-400" >
                <img
-               className="res-logo" src={CDN_URL + cloudinaryImageId } alt="Biryani"/>
+               className=" rounded-md" src={CDN_URL + cloudinaryImageId } alt="Biryani"/>
 
-               <h3>{name}</h3>
+               <h3 className="font-bold py-3 text-lg">{name}</h3>
                <h4>{cuisines.join(', ')}</h4>
                <h4>{avgRating} stars</h4>
                <h4>{costForTwo}</h4>
@@ -27,5 +26,21 @@ const RestaurantCard = (props) => { //or we can write ({resName, cuisine}) => {}
                </div>
             );
 };
+
+//Higher Order Components
+
+// Input - Restaurant Card ==> RestaurantCardPromoted(output)
+//It will return a new component with a promoted label on it and a component is a function that return some piece of JSX
+
+// export const withPromotedLabel = (RestaurantCard) => {
+//   return (props) => { //this is used to make a component
+//     return(
+//         <div>
+//           <label >Promoted</label>
+//           <RestaurantCard {...props}/>
+//         </div>
+//     )
+//   }
+// }
 
 export default RestaurantCard;
