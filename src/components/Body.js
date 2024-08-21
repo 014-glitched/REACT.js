@@ -48,6 +48,7 @@ const Body = () => {
               <div className="filter flex">
                <div className="search m-4 p-4">
                     <input type="text" 
+                    data-testid="searchInput"
                     className="border border-solid border-black" 
                     value={searchText}  //here we are binding the searchText to the input box that means whatever will be in the searchText variable will be there inside the value box so when we are changing the value of input box the value of input box is still tight to the searchText because the value is bind to the searchText and searchText initially is empty so the input box will not change untill we change the searchTextto fix this we will use onChange handler. onChange function will update the searchText. Each time we are writing anything inside our input box the whole body component is getting rendered if we write "Cafe" so it will render 4 times like on a single word we write inside the box it renders the whole component and compare the old DOM with the new DOM.
                     onChange={(e) => {
@@ -72,11 +73,11 @@ const Body = () => {
                               onClick={() => {
                               // * Filter logic
                               const filteredList = listOfRestaurants.filter(
-                              (res) => res.info.avgRating > 4.3
+                              (res) => (res.info.avgRating) > 4.4
                               );
 
-                         setListOfRestaurants(filteredList);
-                         //console.log(filteredList);
+                         setFilteredRestaurant(filteredList);
+                         console.log(filteredList);
                          }}
                     >
                          Top Rated Restaurants

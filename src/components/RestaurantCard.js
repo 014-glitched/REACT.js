@@ -1,7 +1,8 @@
 import { CDN_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => { //or we can write ({resName, cuisine}) => {} it is like destructuring and to understand this we can write it as const{resName, cusine} = props; and pass props as argument like it is passed above
-    const{ resData}  = props;
+    const{ resData }  = props;
+    // console.log(resData);
 
     const {
       cloudinaryImageId,
@@ -14,7 +15,7 @@ const RestaurantCard = (props) => { //or we can write ({resName, cuisine}) => {}
     
        return (
               <div
-                className="m-4 p-4 w-[200px] rounded-lg h-auto bg-gray-100 hover:bg-slate-400" >
+                data-testid="resCard" className="m-4 p-4 w-[200px] rounded-lg h-auto bg-gray-100 hover:bg-slate-400" >
                <img
                className=" rounded-md" src={CDN_URL + cloudinaryImageId } alt="Biryani"/>
 
@@ -44,3 +45,8 @@ const RestaurantCard = (props) => { //or we can write ({resName, cuisine}) => {}
 // }
 
 export default RestaurantCard;
+
+
+
+
+//data-testid="resCard" for each restaurant we will get id as resCard and now we can target resCard according to what we pass inside our testing.
